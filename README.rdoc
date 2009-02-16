@@ -1,14 +1,14 @@
 = AuthenticationEngine
 
-This engine will give you an instant authentication system for a new site, including support for openID authentication and password resets. You will be able to customize look and feel, but it works right out of the box. A long-term goal of mine. ;-)
+This engine will give you an instant authentication system for a new site, including support for user registration, openID authentication, and password resets via email. You will be able to customize look and feel, but it works right out of the box. Even with a completely empty app. ;-)
 
-This Rails 2.3 engine is using the excellent Authlogic gem from BinaryLogic (http://github.com/binarylogic/authlogic/tree/master), and is based on the sample application for that gem.
+This Rails 2.3 engine is using the excellent Authlogic gem (http://github.com/binarylogic/authlogic/tree/master) from Ben Johnson at BinaryLogic, and is based on the sample application for that gem.
 
 == Requirements
 
 1. You need Rails 2.3! This engine is not based on the rails-engines plugin. 
 2. You need the Authlogic gem, but it will prompt for the gem if it's missing
-3. The open_id_authentication plugin. Yes, I built that right in.
+3. The OpenID Authentication plugin. Yes, I built in OpenID support by default.
 
 == Installation
 
@@ -78,6 +78,7 @@ Perhaps that gets rolled into a separate authorization_engine ?
 
 == Credits
 
+On this one, all credit goes to Ben Johnson at BinaryLogic for providing a fresh start on authentication systems for Rails:
 http://github.com/binarylogic/authlogic/tree/master
 
 Enjoy!
