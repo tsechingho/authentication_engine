@@ -1,0 +1,12 @@
+shared: &shared
+  notifier_host: Authentication Engine
+  sender_name: Authentication Notifier
+  sender_email: authentication@example.com
+development:
+  <<: *shared
+
+test:
+  <<: *shared
+
+production:
+  <<: *shared
