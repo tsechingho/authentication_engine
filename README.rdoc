@@ -1,0 +1,85 @@
+= AuthenticationEngine
+
+This engine will give you an instant authentication system for a new site, including support for openID authentication and password resets. You will be able to customize look and feel, but it works right out of the box. A long-term goal of mine. ;-)
+
+This Rails 2.3 engine is using the excellent Authlogic gem from BinaryLogic (http://github.com/binarylogic/authlogic/tree/master), and is based on the sample application for that gem.
+
+== Requirements
+
+1. You need Rails 2.3! This engine is not based on the rails-engines plugin. 
+2. You need the Authlogic gem, but it will prompt for the gem if it's missing
+3. The open_id_authentication plugin. Yes, I built that right in.
+
+== Installation
+
+
+  $ script/plugin install git://github.com/angantyr/authentication_engine.git
+
+  $ script/plugin install git://github.com/rails/open_id_authentication.git
+  
+  $ rake authentication_engine:sync
+  
+  $ rake db:migrate
+
+the authentication_engine:sync rake task does the following, so use it with care on an existing site:
+
+1. moves the migration files over to db/migrate 
+2. moves an authentication_config.yml file and it's initializer into config
+3. moves a mailer template over. rails doesn't seem to pick up mailer templates inside engines
+
+
+== Configuration
+
+A couple of simple steps to get up and running:
+
+In your application_controller.rb, you need to include authentication_system, like so:
+
+  class ApplicationController < ActionController::Base
+    include AuthenticationSystem
+    filter_parameter_logging :password, :password_confirmation
+
+    helper :all # include all helpers, all the time
+    protect_from_forgery # See ActionController::RequestForgeryProtection for details
+
+  end
+
+If you are starting with a completely empty rails site, add a site root like this:
+
+  map.root :controller => "user_sessions", :action => "new"
+
+
+and then for every controller you want to protect, simply add:
+
+  class WidgetsController < ApplicationController
+    before_filter :require_user
+  	...
+  end
+
+In your application layout include the javascript defaults if you are not already
+
+  <%= javascript_include_tag :defaults %>
+
+In your layouts and views you can also call the login status bar:
+
+  <%= render :partial => 'shared/user_status' %>
+
+
+== To-Do List
+
+Build out admin interfaces, which will expose full data on the included models. 
+This step will also require some kind of authorization scheme.  I'm currently planning 
+on using the authorization plugin. Any thoughts on that are welcome.
+Perhaps that gets rolled into a separate authorization_engine ?
+
+== Wish List
+
+* OpenID-based User creation: I would love for the user creation to use the OpenID functionality to the fullest.
+
+
+== Credits
+
+http://github.com/binarylogic/authlogic/tree/master
+
+Enjoy!
+
+Copyright (c) 2009 Mans Angantyr, released under the MIT license
