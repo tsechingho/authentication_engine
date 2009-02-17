@@ -10,7 +10,7 @@
   <body>
     <div id="container">
       <%= render :partial => 'shared/user_status' %>
-
+      <div class="clear"></div>
       <%- flash.each do |name, msg| -%>
         <%= content_tag :div, msg, :id => "flash_#{name}" %>
       <%- end -%>

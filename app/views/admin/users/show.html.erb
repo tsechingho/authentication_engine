@@ -12,24 +12,8 @@
   <%=h @user.login %>
 </p>
 <p>
-  <strong>Crypted Password:</strong>
-  <%=h @user.crypted_password %>
-</p>
-<p>
-  <strong>Password Salt:</strong>
-  <%=h @user.password_salt %>
-</p>
-<p>
-  <strong>Persistence Token:</strong>
-  <%=h @user.persistence_token %>
-</p>
-<p>
-  <strong>Perishable Token:</strong>
-  <%=h @user.perishable_token %>
-</p>
-<p>
-  <strong>Single Access Token:</strong>
-  <%=h @user.single_access_token %>
+  <strong>Openid Identifier:</strong>
+  <%=h @user.openid_identifier %>
 </p>
 <p>
   <strong>Login Count:</strong>
@@ -60,12 +44,7 @@
   <%=h @user.current_login_ip %>
 </p>
 <p>
-  <strong>Openid Identifier:</strong>
-  <%=h @user.openid_identifier %>
-</p>
-
-<p>
-  <%= link_to "Edit", edit_user_path(@user) %> |
-  <%= link_to "Destroy", @user, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", users_path %>
+  <%= link_to "Edit", edit_admin_user_path(@user) %> |
+  <%= link_to "Destroy", admin_user_path(@user), :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_users_path %>
 </p>
