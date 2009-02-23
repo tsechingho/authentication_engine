@@ -37,11 +37,21 @@ module AuthenticationSystem
       session[:return_to] = nil
     end
 
+    # Helper method to determine whether the current user is an administrator
+    def admin?; current_user && current_user.admin?; end
+
+    # Before filter to limit certain actions to administrators
+    def require_admin
+      unless admin?
+        flash[:error] = "Sorry, only administrators can do that."
+        redirect_to '/'
+      end
+    end
 
     # Inclusion hook to make #current_user and #current_user_session
     # available as ActionView helper methods.
     def self.included(base)
-      base.send :helper_method, :current_user, :current_user_session if base.respond_to? :helper_method
+      base.send :helper_method, :current_user, :current_user_session, :admin? if base.respond_to? :helper_method
     end
 
 end

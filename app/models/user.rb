@@ -1,10 +1,40 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
+  # acts_as_authentic
   acts_as_authentic :login_field_validation_options => {:if => :openid_identifier_blank?}, :password_field_validation_options => {:if => :openid_identifier_blank?}, :email_field_validation_options => {:if => :openid_identifier_blank?}
   
   validate :normalize_openid_identifier
   validates_uniqueness_of :openid_identifier, :allow_blank => true
   # validates_length_of :email, :minimum => 500, :unless => "true"
+ 
+  validates_uniqueness_of :invitation_id, :allow_nil => true
+  
+  has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
+  belongs_to :invitation
+
+  before_create :set_invitation_limit
+  # attr_accessible :invitation_token
+
+  def invitation_token
+    invitation.token if invitation
+  end
+
+  def invitation_token=(token)
+    self.invitation = Invitation.find_by_token(token)
+  end
+  
+  def invitation_token
+    invitation.token if invitation
+  end
+
+  def invitation_token=(token)
+    self.invitation = Invitation.find_by_token(token)
+  end
+ 
+ 
+ 
+ 
+ 
+ 
   
   # For acts_as_authentic configuration
   def openid_identifier_blank?
@@ -17,12 +47,17 @@ class User < ActiveRecord::Base
   end
 
   private
+  
     def normalize_openid_identifier
       begin
         self.openid_identifier = OpenIdAuthentication.normalize_url(openid_identifier) if !openid_identifier.blank?
       rescue OpenIdAuthentication::InvalidOpenId => e
         errors.add(:openid_identifier, e.message)
       end
+    end
+
+    def set_invitation_limit
+      self.invitation_limit = 5
     end
   
 end

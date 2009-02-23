@@ -42,13 +42,13 @@ a {color: black;}
 	}
 	#admin_header div.logo{
 		float:left;
-		width:60px;
-		height:60px;
 		}
 		#admin_header div.logo img {
 			float:left;
 			margin:10px 20px 10px 20px;
-			border:1px solid red;
+			border:1px solid silver;
+			width:60px;
+			height:60px;
 }
 
 #admin_menu {
@@ -128,6 +128,7 @@ a {color: black;}
 	font-size:0.8em;
 	color:gray;
 	}
+	#user_status p {margin-bottom:0;}
 	#user_status a:link, #user_status a:visited, #user_status a:active { 
 		text-decoration:none;color:#333333;
 	}

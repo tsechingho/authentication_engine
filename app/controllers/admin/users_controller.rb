@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::AdminController
-  before_filter :require_user
-
+  before_filter :find_user, :only => [:show,:edit,:update]
+  
   def index
     @users = User.all
   end
@@ -20,15 +20,15 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def show
-    @user = User.find(params[:id])   
+    # @user = params[:id] ? User.find(params[:id]) : @current_user
   end
 
   def edit
-    @user = User.find(params[:id])   
+    # @user = User.find(params[:id])   
   end
   
   def update
-    @user = User.find(params[:id])   
+    # @user = User.find(params[:id])   
     if @user.update_attributes(params[:user])
       flash[:notice] = "Account updated!"
       redirect_to admin_user_path(@user)
@@ -37,5 +37,10 @@ class Admin::UsersController < Admin::AdminController
     end
   end
 
+  private
+  
+  def find_user
+    @user = params[:id] ? User.find(params[:id]) : @current_user
+  end
 
 end
