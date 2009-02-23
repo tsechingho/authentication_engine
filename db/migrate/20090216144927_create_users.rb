@@ -17,6 +17,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_login_ip
       t.string :current_login_ip
       t.string :openid_identifier
+      t.integer :invitation_id, :integer
+      t.integer :invitation_limit, :integer, :default => 0, :null => false
+      t.boolean :admin
       t.timestamps
     end
     add_index :users, :login

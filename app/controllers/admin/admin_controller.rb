@@ -1,6 +1,8 @@
 class Admin::AdminController < ApplicationController
+  before_filter :require_user
+  before_filter :require_admin
   layout 'admin'
-  # before_filter :require_admin
+
   # permit 'root'
    
 end

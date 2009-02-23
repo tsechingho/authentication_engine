@@ -1,9 +1,20 @@
 <div id="user_status">
 <% if !current_user %>
+	<p>
   <%= link_to "Register", new_account_path %> |
   <%= link_to "Log In", new_user_session_path %>
+	</p>
 <% else %>
+	<p>
   <%= link_to "My Account", account_path %> |
   <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
+	</p>
+	<% if current_user.invitation_limit > 0 %>
+	<p>
+	<%= link_to 'Send invitation', new_invitation_path %>
+	(<%= current_user.invitation_limit %> left)
+	</p>
+	<% end %>
+
 <% end %>
 </div>

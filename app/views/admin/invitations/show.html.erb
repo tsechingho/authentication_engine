@@ -1,0 +1,16 @@
+<h1>Invitations</h1>
+
+<p>
+  <strong>recipient_email:</strong>
+  <%=h @invitation.recipient_email %>
+</p>
+<p>
+  <strong>sender_id:</strong>
+  <%=h @invitation.sender_id %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_admin_invitation_path(@invitation) %> |
+  <%= link_to "Destroy", admin_invitation_path(@invitation), :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", admin_invitations_path %>
+</p>
