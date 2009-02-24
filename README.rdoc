@@ -35,7 +35,7 @@ A couple of simple steps to get up and running:
 In your application_controller.rb, you need to include authentication_system, like so:
 
   class ApplicationController < ActionController::Base
-    include AuthenticationSystem
+    include AuthenticationEngine
     filter_parameter_logging :password, :password_confirmation
 
     helper :all # include all helpers, all the time
@@ -55,9 +55,17 @@ and then for every controller you want to protect, simply add:
   	...
   end
 
-In your application layout include the javascript defaults if you are not already
+or use a combination of user requirements on a per action level:
+
+	before_filter :require_no_user, :only => [:new, :create]
+	before_filter :require_user, :only => :destroy
+
+
+In your application layout include the javascript defaults if you are not already:
 
   <%= javascript_include_tag :defaults %>
+
+(This is only used for for switching between standard and openid login forms.)
 
 In your layouts and views you can also call the login status bar:
 

@@ -1,4 +1,6 @@
 class InvitationsController < ApplicationController
+  # require_user if only registered uses can send invites
+  # require_no_user if you want to allow public registration for access
   # before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_user
 
