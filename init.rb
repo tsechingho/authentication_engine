@@ -12,5 +12,5 @@ else
   end
 end
 
-require File.dirname(__FILE__) + '/lib/authentication_system'
+require File.dirname(__FILE__) + '/lib/authentication_engine'
 
