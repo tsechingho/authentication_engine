@@ -1,5 +1,8 @@
 class Invitation < ActiveRecord::Base
 
+  # Authorization plugin
+  # acts_as_authorizable
+
   belongs_to :sender, :class_name => 'User'
   has_one :recipient, :class_name => 'User'
 

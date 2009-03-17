@@ -26,6 +26,21 @@ class CreateUsers < ActiveRecord::Migration
     add_index :users, :persistence_token
     add_index :users, :last_request_at
     add_index :users, :openid_identifier
+
+    unless User.find_by_login('root')
+      puts 'Creating root user ...'
+      root_user = User.create  :name => "Root User", 
+                          :login => 'root',
+                          :password => 'root',
+                          :password_confirmation => 'root',
+                          :email => "root@example.com", 
+                          :admin => true 
+      root_user.save(false)   
+      puts "Root user created. login:password is root:root. Please change immediately!"
+    else
+      puts 'Root user already exists.'
+    end
+
   end
 
   

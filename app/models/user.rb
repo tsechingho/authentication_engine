@@ -1,6 +1,13 @@
 class User < ActiveRecord::Base
   # acts_as_authentic
   acts_as_authentic :login_field_validation_options => {:if => :openid_identifier_blank?}, :password_field_validation_options => {:if => :openid_identifier_blank?}, :email_field_validation_options => {:if => :openid_identifier_blank?}
+
+  # # Authorization plugin
+  # acts_as_authorized_user
+  # acts_as_authorizable
+  # authorization plugin may need this too, which breaks the model
+  # attr_accesibles need to merged; this resets it
+  # attr_accessible :role_ids
   
   validate :normalize_openid_identifier
   validates_uniqueness_of :openid_identifier, :allow_blank => true
