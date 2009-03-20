@@ -8,5 +8,8 @@ development:
 test:
   <<: *shared
 
+staging:
+  <<: *shared
+
 production:
   <<: *shared
