@@ -1,4 +1,6 @@
-<h1>Edit User Information</h1>
+<%= render :partial => 'admin/shared/restful_links', :object => @user %>
+<%= auto_title %>
+
 
 <%= error_messages_for :user %>
 <% form_for [:admin,@user] do |f| %>

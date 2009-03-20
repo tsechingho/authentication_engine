@@ -1,8 +1,4 @@
-<h1>Edit Invitations</h1>
-<%= render :partial => 'form' %>
+<%= render :partial => 'admin/shared/restful_links', :object => @invitation %>
+<%= auto_title %>
 
-<p>
-  <%= link_to "Show", admin_invitation_path(@invitation) %> |
-  <%= link_to "Destroy", admin_invitation_path(@invitation), :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", admin_invitations_path %>
-</p>
+<%= render :partial => 'form' %>

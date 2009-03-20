@@ -1,3 +1,6 @@
+<%= render :partial => 'admin/shared/restful_links', :object => @user %>
+<%= auto_title %>
+
 
 <table class="users">
   <tr>
@@ -14,4 +17,3 @@
   <% end %>
 </table>
 
-<p><%= link_to "New User", new_admin_user_path %></p>

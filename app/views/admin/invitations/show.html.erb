@@ -1,4 +1,6 @@
-<h1>Invitations</h1>
+<%= render :partial => 'admin/shared/restful_links', :object => @invitation %>
+<%= auto_title %>
+
 
 <p>
   <strong>recipient_email:</strong>
@@ -7,10 +9,4 @@
 <p>
   <strong>sender_id:</strong>
   <%=h @invitation.sender_id %>
-</p>
-
-<p>
-  <%= link_to "Edit", edit_admin_invitation_path(@invitation) %> |
-  <%= link_to "Destroy", admin_invitation_path(@invitation), :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", admin_invitations_path %>
 </p>

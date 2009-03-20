@@ -1,4 +1,6 @@
-<h1>Invitations</h1>
+<%= render :partial => 'admin/shared/restful_links', :object => @invitation %>
+<%= auto_title %>
+
 
 <table>
   <tr>
@@ -26,4 +28,3 @@
   <% end %>
 </table>
 
-<p><%= link_to "New invitation", new_admin_invitation_path %></p>
