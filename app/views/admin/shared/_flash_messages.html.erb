@@ -1,5 +1,0 @@
-<% if flash.size > 0 %>
-  <% flash.each do |name, msg| %>
-    <%= content_tag :div, msg, :id => "flash", :class => "#{name}" %>
-  <% end %>
-<% end %>
