@@ -1,5 +1,5 @@
 if config.respond_to?(:gems)
-  config.gem 'authlogic', :lib => 'authlogic', :version => '>=1.4.1', :source => "http://gems.github.com"
+  config.gem 'authlogic', :lib => 'authlogic', :version => '1.4.1', :source => "http://gems.github.com"
 else
   begin
     require 'authlogic'
