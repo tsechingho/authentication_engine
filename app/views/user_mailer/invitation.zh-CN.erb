@@ -1,11 +1,9 @@
 Hello <%= @invitation.recipient_name %>!
 
-<% if @invitation.sender %>
+<%- if @invitation.sender -%>
 <%= @invitation.sender.name %> has invited you to register.
-<% else %>
+<%- else -%>
 You are invited to register.
-<% end %>
+<%- end -%>
 
 <%= @signup_url %>
-
-Find me in app/views/mailer/invitation.erb

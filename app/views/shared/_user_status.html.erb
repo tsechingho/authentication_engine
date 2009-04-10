@@ -1,20 +1,27 @@
 <div id="user_status">
-<% if !current_user %>
-	<p>
-  <%= link_to "Register", new_account_path %> |
-  <%= link_to "Log In", new_user_session_path %>
-	</p>
-<% else %>
-	<p>
-  <%= link_to "My Account", account_path %> |
-  <%= link_to "Logout", user_session_path, :method => :delete, :confirm => "Are you sure you want to logout?" %>
-	</p>
-	<% if current_user.invitation_limit > 0 %>
-	<p>
-	<%= link_to 'Send invitation', new_invitation_path %>
-	(<%= current_user.invitation_limit %> left)
-	</p>
-	<% end %>
+<%- if !current_user -%>
+  <p>
+    <%= link_to t('users.actions.signup'), signup_path %> |
+    <%= link_to t('users.actions.login'), login_path %>
+  </p>
+<%- else -%>
+  <p>
+    <%= link_to t('users.account'), account_path %> |
+    <%= link_to t('users.actions.logout'), logout_path, :method => :delete, :confirm => t('users.confirms.logout') %>
+  </p>
+  <%- if current_user.invitation_limit > 0 -%>
+  <p>
+    <%= link_to t('users.actions.send_invitation'), new_invitation_path %>
+    (<%= current_user.invitation_limit %> left)
+  </p>
+  <%- end -%>
+<%- end -%>
+</div>
 
-<% end %>
+<div id="locale_pannel">
+  <% form_tag request.path, :method => :get do %>
+    <p>
+      <%= select_tag :locale, options_for_select(@locales_available, I18n.locale), { :index => nil, :onchange => 'this.form.submit()' } %>
+    </p>
+  <% end %>
 </div>

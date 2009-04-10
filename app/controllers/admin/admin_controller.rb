@@ -6,6 +6,4 @@ class Admin::AdminController < ApplicationController
   # permit 'root or admin'
 
   layout 'admin'
-
-   
 end

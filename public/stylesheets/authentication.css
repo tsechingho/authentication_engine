@@ -16,7 +16,7 @@
 /* make login and openid boxes pretty */
 
 form.new_user_session {
-	border:1px solid silver;
+	border:0px solid silver;
 	padding:1em;
 	}
 	form.new_user_session label {font-weight:bold;}

@@ -1,33 +1,34 @@
 class PasswordResetsController < ApplicationController
   before_filter :load_user_using_perishable_token, :only => [:edit, :update]
   before_filter :require_no_user
-  
+
+  # GET /password_resets/new
   def new
     render
   end
-  
-  def create
-    @user = User.find_by_email(params[:email])
-    if @user
-      @user.deliver_password_reset_instructions!
-      flash[:notice] = "Instructions to reset your password have been emailed to you. " +
-        "Please check your email."
-      redirect_to root_url
-    else
-      flash[:notice] = "No user was found with that email address"
-      render :action => :new
-    end
-  end
-  
+
+  # GET /password_resets/1/edit
   def edit
     render
   end
 
+  # POST /password_resets
+  def create
+    @user = User.find_by_email(params[:email])
+    if @user
+      @user.deliver_password_reset_instructions!
+      flash[:success] = t('password_resets.flashs.success.create')
+      redirect_to root_url
+    else
+      flash[:error] = t('password_resets.flashs.errors.create')
+      render :action => :new
+    end
+  end
+
+  # PUT /password_resets/1
   def update
-    @user.password = params[:user][:password]
-    @user.password_confirmation = params[:user][:password_confirmation]
-    if @user.save
-      flash[:notice] = "Password successfully updated"
+    if @user.activate!(params[:user])
+      flash[:success] = t('password_resets.flashs.success.update')
       redirect_to account_url
     else
       render :action => :edit
@@ -35,14 +36,12 @@ class PasswordResetsController < ApplicationController
   end
 
   private
-    def load_user_using_perishable_token
-      @user = User.find_using_perishable_token(params[:id])
-      unless @user
-        flash[:notice] = "We're sorry, but we could not locate your account." +
-          "If you are having issues try copying and pasting the URL " +
-          "from your email into your browser or restarting the " +
-          "reset password process."
-        redirect_to root_url
-      end
+
+  def load_user_using_perishable_token
+    @user = User.find_using_perishable_token(params[:id])
+    unless @user
+      flash[:error] = t('password_resets.flashs.errors.update')
+      redirect_to root_url
     end
+  end
 end

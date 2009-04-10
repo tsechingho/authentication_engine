@@ -17,8 +17,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :last_login_ip
       t.string :current_login_ip
       t.string :openid_identifier
-      t.integer :invitation_id, :integer
-      t.integer :invitation_limit, :integer, :default => 0, :null => false
+      t.integer :invitation_id
+      t.integer :invitation_limit, :default => 0, :null => false
       t.boolean :admin
       t.timestamps
     end
@@ -29,21 +29,21 @@ class CreateUsers < ActiveRecord::Migration
 
     unless User.find_by_login('root')
       puts 'Creating root user ...'
-      root_user = User.create  :name => "Root User", 
-                          :login => 'root',
-                          :password => 'root',
-                          :password_confirmation => 'root',
-                          :email => "root@example.com", 
-                          :admin => true 
-      root_user.save(false)   
-      puts "Root user created. login:password is root:root. Please change immediately!"
+      root_user = User.create(
+        :name => "Root User",
+        :login => 'root',
+        :password => 'root',
+        :password_confirmation => 'root',
+        :email => "root@example.com",
+        :admin => true
+      )
+      root_user.save(false)
+      puts "Root user created. login/password is root/root. Please change immediately!"
     else
       puts 'Root user already exists.'
     end
-
   end
 
-  
   def self.down
     drop_table :users
   end

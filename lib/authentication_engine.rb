@@ -1,20 +1,24 @@
 module AuthenticationEngine
-  protected
+  module ClassMethods
+    
+  end
+
+  module InstanceMethods
+    protected
+
     def current_user_session
-      return @current_user_session if defined?(@current_user_session)
-      @current_user_session = UserSession.find
+      @current_user_session ||= UserSession.find
     end
 
     def current_user
-      return @current_user if defined?(@current_user)
-      @current_user = current_user_session && current_user_session.user
+      @current_user ||= current_user_session && current_user_session.record
     end
-  
+
     def require_user
       unless current_user
         store_location
-        flash[:notice] = "You must be logged in to access this page"
-        redirect_to new_user_session_url
+        flash[:notice] = t('users.flashs.notices.login_required')
+        redirect_to login_url
         return false
       end
     end
@@ -22,7 +26,7 @@ module AuthenticationEngine
     def require_no_user
       if current_user
         store_location
-        flash[:notice] = "You must be logged out to access this page"
+        flash[:notice] = t('users.flashs.notices.logout_required')
         redirect_to account_url
         return false
       end
@@ -38,20 +42,29 @@ module AuthenticationEngine
     end
 
     # Helper method to determine whether the current user is an administrator
-    def admin?; current_user && current_user.admin?; end
+    def admin?
+      current_user && current_user.admin?
+    end
 
     # Before filter to limit certain actions to administrators
     def require_admin
       unless admin?
-        flash[:error] = "Sorry, only administrators can do that."
-        redirect_to '/'
+        store_location
+        flash[:error] = t('users.flashs.errors.admin_required')
+        redirect_to root_url
+        return false
       end
     end
+  end
 
-    # Inclusion hook to make #current_user and #current_user_session
-    # available as ActionView helper methods.
-    def self.included(base)
-      base.send :helper_method, :current_user, :current_user_session, :admin? if base.respond_to? :helper_method
+  # Inclusion hook to make #current_user and #current_user_session
+  # available as ActionView helper methods.
+  def self.included(receiver)
+    receiver.extend ClassMethods
+    receiver.class_eval do
+      include InstanceMethods
+      helper_method :current_user_session, :current_user, :admin?
+      filter_parameter_logging :password, :password_confirmation
     end
-
+  end
 end

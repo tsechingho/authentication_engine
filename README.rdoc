@@ -17,6 +17,8 @@ This Rails 2.3 engine is using the excellent Authlogic gem (http://github.com/bi
 
   $ script/plugin install git://github.com/rails/open_id_authentication.git
   
+  $ script/plugin install git://github.com/iain/i18n_label.git
+  
   $ rake authentication_engine:sync
   
   $ rake db:migrate
@@ -36,17 +38,17 @@ In your application_controller.rb, you need to include authentication_system, li
 
   class ApplicationController < ActionController::Base
     include AuthenticationEngine
-    filter_parameter_logging :password, :password_confirmation
+    include LocalizedSystem
 
     helper :all # include all helpers, all the time
     protect_from_forgery # See ActionController::RequestForgeryProtection for details
-
   end
 
 If you are starting with a completely empty rails site, add a site root like this:
 
-  map.root :controller => "user_sessions", :action => "new"
+  map.root :controller => "home", :action => "index"
 
+and remove index.html in public folder,
 
 and then for every controller you want to protect, simply add:
 

@@ -1,12 +1,16 @@
-<h1>Change My Password</h1>
+<% title t('password_resets.titles.edit') %>
 
 <% form_for @user, :url => password_reset_path, :method => :put do |f| %>
   <%= f.error_messages %>
-  <%= f.label :password, "New Password" %><br />
-  <%= f.password_field :password %><br />
-  <br />
-  <%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %><br />
-  <br />
-  <%= f.submit "Update my password and log me in" %>
+  <p>
+    <%= f.label :password, t('password_resets.new_password') %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.submit t('password_resets.actions.update') %>
+  </p>
 <% end %>

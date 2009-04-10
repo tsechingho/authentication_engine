@@ -1,32 +1,21 @@
-<h1>Create Account</h1>
+<% title t('users.titles.new') %>
 
-<%= error_messages_for :user %>
 <% form_for @user, :url => account_path do |f| %>
-<fieldset>
-	<legend>Register using OpenID</legend>
-	<%= f.label :openid_identifier, "Use OpenID" %><br />
-	<%= f.text_field :openid_identifier, :size => 50 %><br />
-	<p><%= f.submit "Register" %></p>
-</fieldset>
-<% end %>
-<h2> - or -</h2>
-<% form_for @user, :url => account_path do |f| %>
-<fieldset>
-	<legend>Create a username and password</legend>
-	<%= f.label :name %><br />
-	<%= f.text_field :name %><br />
-	<br />
-	<%= f.label :email %><br />
-	<%= f.text_field :email %><br />
-	<br />
-	<%= f.label :login %><br />
-	<%= f.text_field :login %><br />
-	<br />
-	<%= f.label :password, f.object.new_record? ? nil : "Change password" %><br />
-	<%= f.password_field :password %><br />
-	<br />
-	<%= f.label :password_confirmation %><br />
-	<%= f.password_field :password_confirmation %><br />
-	<p><%= f.submit "Register" %></p>
-</fieldset>
+  <%= f.error_messages %>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <%= f.hidden_field :invitation_id %>
+  <p>
+    <%= f.submit t('users.actions.signup') %>
+  </p>
 <% end %>

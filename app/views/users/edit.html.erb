@@ -1,42 +1,54 @@
-<h1>Edit My Account</h1>
+<% title t('users.titles.edit') %>
 
 <%= error_messages_for :user %>
+
 <% form_for @user, :url => account_path do |f| %>
 <fieldset>
-	<legend>Register your OpenID</legend>
-	<%= f.label :openid_identifier, "Use OpenID" %><br />
-	<%= f.text_field :openid_identifier, :size => 50 %><br />
- 	<p><%= f.submit "Update Account Information" %></p>
+  <legend><%= t('users.account_information') %></legend>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :login %><br />
+    <%= f.text_field :login %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.submit t('users.actions.update') %>
+  </p>
 </fieldset>
 <% end %>
 
 <% form_for @user, :url => account_path do |f| %>
 <fieldset>
-	<legend>Update Account Information</legend>
-	<%= f.label :name %><br />
-	<%= f.text_field :name %><br />
-	<br />
-	<%= f.label :email %><br />
-	<%= f.text_field :email %><br />
-	<br />
-	<%= f.label :login %><br />
-	<%= f.text_field :login %><br />
- 	<p><%= f.submit "Update Account Information" %></p>
+  <legend><%= t('users.register_openid') %></legend>
+  <p>
+    <%= f.label :openid_identifier, openid_link %><br />
+    <%= f.text_field :openid_identifier, :size => 50 %>
+  </p>
+  <p>
+    <%= f.submit t('users.actions.update') %>
+  </p>
 </fieldset>
 <% end %>
 
 <% form_for @user, :url => account_path do |f| %>
 <fieldset>
-	<legend>Change Your Password</legend>
-	<%= f.label :password, f.object.new_record? ? nil : "New password" %><br />
-	<%= f.password_field :password %><br />
-	<br />
-	<%= f.label :password_confirmation, "New password confirmation" %><br />
-	<%= f.password_field :password_confirmation %><br />
- 	<p><%= f.submit "Update Account Information" %></p>
+  <legend><%= t('users.change_password') %></legend>
+  <p>
+    <%= f.label :password, t('users.new_password') %><br />
+    <%= f.password_field :password %>
+  </p>
+  <p>
+    <%= f.label :password_confirmation, t('users.new_password_confirmation') %><br />
+    <%= f.password_field :password_confirmation %>
+  </p>
+  <p>
+    <%= f.submit t('users.actions.update') %>
+  </p>
 </fieldset>
 <% end %>
-
-<p>
-<%= link_to "My Account", account_path %>
-</p>

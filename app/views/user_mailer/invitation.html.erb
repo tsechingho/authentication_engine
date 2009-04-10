@@ -1,0 +1,9 @@
+Hello <%= @invitation.recipient_name %>!
+
+<%- if @invitation.sender -%>
+<%= @invitation.sender.name %> has invited you to register.
+<%- else -%>
+You are invited to register.
+<%- end -%>
+
+<%= link_to @signup_url, @signup_url %>

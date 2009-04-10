@@ -1,46 +1,48 @@
+<% title t('users.titles.show') %>
+
 <p>
-  <strong>Name:</strong>
+  <b><%= at(User, :name) %>:</b>
   <%=h @user.name %>
 </p>
 <p>
-  <strong>Email:</strong>
-  <%=h @user.email %>
-</p>
-<p>
-  <strong>Openid Identifier:</strong>
-  <%=h @user.openid_identifier %>
-</p>
-<p>
-  <strong>Login:</strong>
+  <b><%= at(User, :login) %>:</b>
   <%=h @user.login %>
 </p>
 <p>
-  <strong>Login Count:</strong>
+  <b><%= at(User, :email) %>:</b>
+  <%=h @user.email %>
+</p>
+<p>
+  <b><%= openid_link %>:</b>
+  <%=h @user.openid_identifier %>
+</p>
+<p>
+  <b><%= at(User, :login_count) %>:</b>
   <%=h @user.login_count %>
 </p>
 <p>
-  <strong>Last Request At:</strong>
+  <b><%= at(User, :failed_login_count) %>:</b>
+  <%=h @user.failed_login_count %>
+</p>
+<p>
+  <b><%= at(User, :last_request_at) %>:</b>
   <%=h @user.last_request_at %>
 </p>
 <p>
-  <strong>Last Login At:</strong>
+  <b><%= at(User, :last_login_at) %>:</b>
   <%=h @user.last_login_at %>
 </p>
 <p>
-  <strong>Current Login At:</strong>
-  <%=h @user.current_login_at %>
-</p>
-<p>
-  <strong>Last Login Ip:</strong>
+  <b><%= at(User, :last_login_ip) %>:</b>
   <%=h @user.last_login_ip %>
 </p>
 <p>
-  <strong>Current Login Ip:</strong>
-  <%=h @user.current_login_ip %>
+  <b><%= at(User, :current_login_at) %>:</b>
+  <%=h @user.current_login_at %>
 </p>
 <p>
-  <strong>Openid Identifier:</strong>
-  <%=h @user.openid_identifier %>
+  <b><%= at(User, :current_login_ip) %>:</b>
+  <%=h @user.current_login_ip %>
 </p>
 
-<%= link_to 'Edit', edit_account_path %>
+<%= link_to t('common.actions.edit'), edit_account_path %>

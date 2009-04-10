@@ -1,0 +1,17 @@
+shared: &shared
+  notifier:
+    host: localhost:3000
+    name: User Notifier
+    email: noreply@example.com
+
+development:
+  <<: *shared
+
+test:
+  <<: *shared
+
+staging:
+  <<: *shared
+
+production:
+  <<: *shared

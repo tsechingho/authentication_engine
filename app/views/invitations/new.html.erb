@@ -1,22 +1,23 @@
-<h1>New Invitation</h1>
+<% title t('invitations.titles.new') %>
 
 <%= error_messages_for :invitation %>
 
 <% form_for @invitation do |f| %>
   <p>
-    <%= f.label :recipient_name, "Friend's full name:" %><br />
+    <%= f.label :recipient_name, t('invitations.recipient_name') %><br />
     <%= f.text_field :recipient_name %>
   </p>
   <p>
-    <%= f.label :recipient_email, "Friend's email address:" %><br />
+    <%= f.label :recipient_email, t('invitations.recipient_email') %><br />
     <%= f.text_field :recipient_email %>
   </p>
+<!-->
   <p>
     <%# f.label :site_id %><br />
     <%# f.collection_select(:site_id, current_user_sites, :id, :name) %>  </p>
   <p>
-  
-  <p><%= f.submit "Invite!" %></p>
+<-->
+  <p><%= f.submit t('invitations.actions.new') %></p>
 <% end %>
 
 
