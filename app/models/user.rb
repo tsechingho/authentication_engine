@@ -1,8 +1,9 @@
 class User < ActiveRecord::Base
-  acts_as_authentic :login_field_validation_options => {:if => :openid_identifier_blank?}, 
-    :password_field_validation_options => {:if => :openid_identifier_blank?}, 
-    :password_field_validates_length_of_options => { :on => :update, :if => :has_no_credentials? }, 
-    :email_field_validation_options => {:if => :openid_identifier_blank?}
+  acts_as_authentic do |c|
+    c.validates_length_of_password_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
+    c.validates_confirmation_of_password_field_options = {:minimum => 4, :on => :update, :if => (password_salt_field ? "#{password_salt_field}_changed?".to_sym : nil)}
+    c.validates_length_of_password_confirmation_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
+  end
 
   # # Authorization plugin
   # acts_as_authorized_user
@@ -31,17 +32,6 @@ class User < ActiveRecord::Base
 
   def invitation_token=(token)
     self.invitation = Invitation.find_by_token(token)
-  end
-
-  # For acts_as_authentic configuration
-  def openid_identifier_blank?
-    openid_identifier.blank?
-  end
-
-  # we need to make sure that either a password or openid gets set
-    # when the user activates his account
-  def has_no_credentials?
-    self.crypted_password.blank? && self.openid_identifier.blank?
   end
 
   def signup!(user)
