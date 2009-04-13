@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
     c.validates_length_of_password_confirmation_field_options = {:minimum => 4, :on => :update, :if => :require_password?}
   end
 
+  validates_length_of :password, :minimum => 4, :on => :create, :if => :invited_and_require_password?
+  validates_confirmation_of :password_confirmation, :on => :create, :if => :invited_and_require_password?
+  validates_length_of :password_confirmation, :minimum => 4, :on => :create, :if => :invited_and_require_password?
+
   # # Authorization plugin
   # acts_as_authorized_user
   # acts_as_authorizable
@@ -34,14 +38,25 @@ class User < ActiveRecord::Base
     self.invitation = Invitation.find_by_token(token)
   end
 
+  def invited_and_require_password?
+    !invitation_id.blank? and require_password?
+  end
+
   def signup!(user)
     self.name = user[:name]
     self.login = user[:login]
     self.email = user[:email]
-    self.invitation_id = user[:invitation_id]
-    # only one user can be admin
-    self.admin = true if User.count == 0
-    save_without_session_maintenance
+    if user[:invitation_id]
+      self.invitation_id = user[:invitation_id]
+      self.password = user[:password]
+      self.password_confirmation = user[:password_confirmation]
+      self.openid_identifier = user[:openid_identifier]
+      save
+    else
+      # only one user can be admin
+      self.admin = true if User.count == 0
+      save_without_session_maintenance
+    end
   end
 
   def activate!(user)
