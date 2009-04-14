@@ -34,30 +34,36 @@ class UsersController < ApplicationController
   def create
     @user = User.new
 
-    if @user.signup!(params[:user])
-      if @user.invitation
-        @user.deliver_activation_confirmation!
-        flash[:success] = t('activations.flashs.success.create')
-        redirect_to account_url
+    @user.signup!(params[:user]) do |result|
+      if result
+        if @user.invitation
+          @user.deliver_activation_confirmation!
+          flash[:success] = t('activations.flashs.success.create')
+          redirect_to account_url
+        else
+          @user.deliver_activation_instructions!
+          flash[:success] = t('users.flashs.success.create')
+          redirect_to root_url
+        end
       else
-        @user.deliver_activation_instructions!
-        flash[:success] = t('users.flashs.success.create')
-        redirect_to root_url
+        find_invitation
+        render :action => :new
       end
-    else
-      find_invitation
-      render :action => :new
     end
   end
 
   # PUT /users/1
   # PUT /account
   def update
-    if @user.update_attributes(params[:user])
-      flash[:success] = t('users.flashs.success.update')
-      redirect_to account_url
-    else
-      render :action => :edit
+    @user.attributes = params[:user]
+
+    @user.save do |result|
+      if result
+        flash[:success] = t('users.flashs.success.update')
+        redirect_to account_url
+      else
+        render :action => :edit
+      end
     end
   end
 

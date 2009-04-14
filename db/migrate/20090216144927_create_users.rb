@@ -2,12 +2,12 @@ class CreateUsers < ActiveRecord::Migration
   def self.up
     create_table :users do |t|
       t.string :name
-      t.string :email, :default => "", :null => false
+      t.string :email, :null => false
       t.string :login, :default => nil, :null => true
       t.string :crypted_password, :default => nil, :null => true
       t.string :password_salt, :default => nil, :null => true
       t.string :persistence_token, :null => false
-      t.string :perishable_token, :default => "", :null => false
+      t.string :perishable_token, :null => false
       t.string :single_access_token, :null => false
       t.integer :login_count, :default => 0, :null => false
       t.integer :failed_login_count, :default => 0, :null => false

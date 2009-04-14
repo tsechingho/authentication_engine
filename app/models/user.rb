@@ -8,6 +8,9 @@ class User < ActiveRecord::Base
   validates_length_of :password, :minimum => 4, :on => :create, :if => :invited_and_require_password?
   validates_confirmation_of :password_confirmation, :on => :create, :if => :invited_and_require_password?
   validates_length_of :password_confirmation, :minimum => 4, :on => :create, :if => :invited_and_require_password?
+  validates_uniqueness_of :invitation_id, :allow_nil => true
+
+  attr_accessible :name, :email, :login, :password, :password_confirmation, :openid_identifier, :invitation_id
 
   # # Authorization plugin
   # acts_as_authorized_user
@@ -15,14 +18,6 @@ class User < ActiveRecord::Base
   # authorization plugin may need this too, which breaks the model
   # attr_accesibles need to merged; this resets it
   # attr_accessible :role_ids
-
-  validate :normalize_openid_identifier
-  validates_uniqueness_of :openid_identifier, :allow_blank => true
-  # validates_length_of :email, :minimum => 500, :unless => "true"
-
-  validates_uniqueness_of :invitation_id, :allow_nil => true
-
-  attr_accessible :name, :login, :email, :password, :password_confirmation, :openid_identifier, :invitation_id
 
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   belongs_to :invitation
@@ -39,30 +34,54 @@ class User < ActiveRecord::Base
   end
 
   def invited_and_require_password?
-    !invitation_id.blank? and require_password?
+    !invitation_id.blank? && validate_password_with_openid?
   end
 
-  def signup!(user)
-    self.name = user[:name]
-    self.login = user[:login]
-    self.email = user[:email]
-    if user[:invitation_id]
-      self.invitation_id = user[:invitation_id]
+  # We need to distinguish general signup or invitee singup
+  def signup!(user, &block)
+    return save(true, &block) if openid_complete?
+    return signup_as_invitee!(user, &block) if user and user[:invitation_id]
+    signup_without_credentials!(user, &block)
+  end
+
+  # Since invitee need to be activated with credentials,
+  # we save with &block to prevent double render/redirect error.
+  def signup_as_invitee!(user, &block)
+    self.attributes = user if user
+    save(true, &block)
+  end
+
+  # Since users have to activate themself with credentials,
+  # we should signup without session maintenance and keep block style.
+  def signup_without_credentials!(user, &block)
+    unless user.blank?
+      self.name = user[:name]
+      self.login = user[:login]
+      self.email = user[:email]
+    end
+    # only one user can be admin
+    self.admin = true if User.count == 0
+    result = save_without_session_maintenance
+    yield(result) if block_given?
+    result
+  end
+
+  # Since openid_identifier= will trigger openid authentication,
+  # we need to save with block to prevent double render/redirect error.
+  def activate!(user, &block)
+    unless user.blank?
       self.password = user[:password]
       self.password_confirmation = user[:password_confirmation]
       self.openid_identifier = user[:openid_identifier]
-      save
-    else
-      # only one user can be admin
-      self.admin = true if User.count == 0
-      save_without_session_maintenance
     end
+    save(true, &block)
   end
 
-  def activate!(user)
+  # Since password reset doesn't need to change openid_identifier,
+  # we save without block as usual.
+  def reset_password!(user)
     self.password = user[:password]
     self.password_confirmation = user[:password_confirmation]
-    self.openid_identifier = user[:openid_identifier]
     save
   end
 
@@ -88,16 +107,17 @@ class User < ActiveRecord::Base
 
   private
 
-  def normalize_openid_identifier
-    begin
-      self.openid_identifier = OpenIdAuthentication.normalize_identifier(openid_identifier) if !openid_identifier.blank?
-    rescue OpenIdAuthentication::InvalidOpenId => e
-      errors.add(:openid_identifier, e.message)
-    end
-  end
-
   def set_invitation_limit
     self.invitation_limit = 5
+  end
+
+  def attributes_to_save
+    attrs_to_save = attributes.clone.delete_if do |k, v|
+      [:password, crypted_password_field, password_salt_field, :persistence_token, :perishable_token, :single_access_token, :login_count, 
+        :failed_login_count, :last_request_at, :current_login_at, :last_login_at, :current_login_ip, :last_login_ip, :created_at,
+        :updated_at, :lock_version, :admin, :invitation_limit].include?(k.to_sym)
+    end
+    attrs_to_save.merge!(:password => password, :password_confirmation => password_confirmation)
   end
 
   # one admin at least

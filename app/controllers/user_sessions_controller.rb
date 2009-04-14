@@ -10,6 +10,7 @@ class UserSessionsController < ApplicationController
   # POST /user_session
   def create
     @user_session = UserSession.new(params[:user_session])
+
     @user_session.save do |result|
       if result
         flash[:success] = t('user_sessions.flashs.success.create')
