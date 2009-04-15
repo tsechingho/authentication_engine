@@ -1,48 +1,47 @@
+<% title t('admin.users.titles.show') %>
 <%# render :partial => 'admin/shared/restful_links', :object => @user %>
-<%# auto_title %>
-
 
 <p>
-  <strong>Name:</strong>
+  <b><%= at(User, :name) %>:</b>
   <%=h @user.name %>
 </p>
 <p>
-  <strong>Email:</strong>
+  <b><%= at(User, :email) %>:</b>
   <%=h @user.email %>
 </p>
 <p>
-  <strong>Login:</strong>
+  <b><%= at(User, :login) %>:</b>
   <%=h @user.login %>
 </p>
 <p>
-  <strong>Openid Identifier:</strong>
+  <b><%= openid_link %>:</b>
   <%=h @user.openid_identifier %>
 </p>
 <p>
-  <strong>Login Count:</strong>
+  <b><%= at(User, :login_count) %>:</b>
   <%=h @user.login_count %>
 </p>
 <p>
-  <strong>Failed Login Count:</strong>
+  <b><%= at(User, :failed_login_count) %>:</b>
   <%=h @user.failed_login_count %>
 </p>
 <p>
-  <strong>Last Request At:</strong>
+  <b><%= at(User, :last_request_at) %>:</b>
   <%=h @user.last_request_at %>
 </p>
 <p>
-  <strong>Last Login At:</strong>
+  <b><%= at(User, :last_login_at) %>:</b>
   <%=h @user.last_login_at %>
 </p>
 <p>
-  <strong>Current Login At:</strong>
-  <%=h @user.current_login_at %>
-</p>
-<p>
-  <strong>Last Login Ip:</strong>
+  <b><%= at(User, :last_login_ip) %>:</b>
   <%=h @user.last_login_ip %>
 </p>
 <p>
-  <strong>Current Login Ip:</strong>
+  <b><%= at(User, :current_login_at) %>:</b>
+  <%=h @user.current_login_at %>
+</p>
+<p>
+  <b><%= at(User, :current_login_ip) %>:</b>
   <%=h @user.current_login_ip %>
 </p>

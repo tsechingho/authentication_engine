@@ -141,7 +141,12 @@
           attributes:
             recipient_email:
               registered: "已经注册"
-          reach_invitaion_limit: "你能邀请的数量已经使用完毕"
+              invalid: "不像是标准的电子邮件格式"
+            applicant_email:
+              registered: "已经注册"
+              invalid: "不像是标准的电子邮件格式"
+          reach_invitation_limit: "你能发出邀请的数量已经用罄"
+        
       
       messages:
         inclusion: "不包含于列表中"
@@ -192,8 +197,10 @@
       
       invitation:
         sender_id: "邀请者"
-        recipient_name: "受邀者姓名"
-        recipient_email: "受邀者电邮"
+        recipient_name: "朋友的全名"
+        recipient_email: "朋友的电邮"
+        applicant_name: "申请者的全名"
+        applicant_email: "申请者的电邮"
         sent_at: "发送于"
       
     
@@ -281,16 +288,15 @@
     flashs:
       success:
         create: "感谢，邀请函已经送出"
+        ask: "感谢，我们会审视你的申请"
       notices:
         create: "感谢，当准备好后，我们会通知你"
     titles:
-      new: "新的邀请"
+      new: "提出邀请"
+      apply: "邀请请求"
     actions:
-      new: "邀请!"
-    recipient_name: "朋友的全名："
-    recipient_email: "朋友的电邮："
-    your_email: "你的电邮："
-    new_password: "新密码"
+      new: "邀请！"
+      ask: "提出请求！"
   
   password_resets:
     flashs:
@@ -307,13 +313,16 @@
       reset: "重设我的密码"
       update: "更新我的密码并登入"
     reset_note: "填入下面的表单，重设密码的指引会电邮给你："
+    your_email: "你的电邮："
+    new_password: "新密码"
   
   user_mailer:
     titles:
       activation_instructions: "帐号启动指引"
       activation_confirmation: "帐号启动完成"
       password_reset_instructions: "密码重设指引"
-      user_invitation: "使用者邀请"
+      user_invitation: "用户邀请"
+      user_invitation_request: "用户邀请请求"
   
   user_sessions:
     flashs:
@@ -350,7 +359,8 @@
       login: "登入"
       logout: "登出"
       update: "更新用户资讯"
-      send_invitation: "送出邀请"
+      invite: "送出邀请"
+      request_invitation: "提出邀请请求"
     confirms:
       logout: "你确定要登出吗？"
     basic_information: "基本资讯"
@@ -368,4 +378,15 @@
     new_password_confirmation: "确认新密码"
     signup_by_openid: "使用 Open ID 注册"
     signup_by_password: "使用帐号和密码注册"
+    invitations_limit: "（剩下 {{count}} 个）"
+    admin_pannel: "管理面板"
   
+  admin:
+    users:
+      titles:
+        index: "用户列表"
+        show: "用户"
+    invitations:
+      titles:
+        index: "邀请列表"
+    title_prefix: "管理"

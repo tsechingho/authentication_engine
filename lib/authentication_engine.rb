@@ -55,6 +55,22 @@ module AuthenticationEngine
         return false
       end
     end
+
+    def no_signup
+      redirect_to root_url unless REGISTRATION[:private] or REGISTRATION[:beta] or REGISTRATION[:open]
+    end
+
+    def private_signup
+      redirect_to root_url unless REGISTRATION[:private]
+    end
+
+    def beta_signup
+      redirect_to root_url unless REGISTRATION[:beta]
+    end
+
+    def open_signup
+      redirect_to root_url unless REGISTRATION[:open]
+    end
   end
 
   # Inclusion hook to make #current_user and #current_user_session

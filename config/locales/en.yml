@@ -10,7 +10,12 @@ en:
           attributes:
             recipient_email:
               registered: "is already registered"
-          reach_invitaion_limit: "You have reached your limit of invitations to send."
+              invalid: "should look like an email address."
+            applicant_email:
+              registered: "is already registered"
+              invalid: "should look like an email address."
+          reach_invitation_limit: "You have reached your limit of invitations to send."
+        
       
     models:
       role: "Role"
@@ -39,8 +44,10 @@ en:
       
       invitation:
         sender_id: "Sender"
-        recipient_name: "Recipient name"
-        recipient_email: "Recipient email"
+        recipient_name: "Friend's full name"
+        recipient_email: "Friend's email address"
+        applicant_name: "Applicant's full name"
+        applicant_email: "Applicant's email address"
         sent_at: "Sent at"
       
     
@@ -128,14 +135,15 @@ en:
     flashs:
       success:
         create: "Thank you, invitation sent."
+        ask: "Thank you, we will inspect your application."
       notices:
         create: "Thank you, we will notify you when we are ready."
     titles:
       new: "New Invitation"
+      apply: "Invitation Request"
     actions:
       new: "Invite!"
-    recipient_name: "Friend's full name:"
-    recipient_email: "Friend's email address:"
+      apply: "Request!"
   
   password_resets:
     flashs:
@@ -161,6 +169,7 @@ en:
       activation_confirmation: "Activation Complete"
       password_reset_instructions: "Password Reset Instructions"
       user_invitation: "User Invitation"
+      user_invitation_request: "User Invitation Request"
   
   user_sessions:
     flashs:
@@ -198,7 +207,8 @@ en:
       login: "Log In"
       logout: "Logout"
       update: "Update Account Information"
-      send_invitation: "Send invitation"
+      invite: "Send Invitation"
+      request_invitation: "Request Invitation"
     confirms:
       logout: "Are you sure you want to logout?"
     basic_information: "Basic Information"
@@ -216,4 +226,15 @@ en:
     new_password_confirmation: "New password confirmation"
     signup_by_openid: "Register using OpenID"
     signup_by_password: "Create by a username and password"
+    invitations_limit: "({{count}} left)"
+    admin_pannel: "Admin Pannel"
   
+  admin:
+    users:
+      titles:
+        index: "Users List"
+        show: "User"
+    invitations:
+      titles:
+        index: "Invitations List"
+    title_prefix: "Admin"

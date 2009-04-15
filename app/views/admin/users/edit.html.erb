@@ -1,40 +1,39 @@
 <%# render :partial => 'admin/shared/restful_links', :object => @user %>
 <%# auto_title %>
 
-
 <%= error_messages_for :user %>
 <% form_for [:admin,@user] do |f| %>
 <fieldset>
-	<legend>Register your OpenID</legend>
-	<%= f.label :openid_identifier, "Use OpenID" %><br />
-	<%= f.text_field :openid_identifier, :size => 50 %><br />
- 	<p><%= f.submit "Update User Information" %></p>
+  <legend>Register your OpenID</legend>
+  <%= f.label :openid_identifier, "Use OpenID" %><br />
+  <%= f.text_field :openid_identifier, :size => 50 %><br />
+  <p><%= f.submit "Update User Information" %></p>
 </fieldset>
 <% end %>
 
 <% form_for [:admin,@user] do |f| %>
 <fieldset>
-	<legend>Update Account Information</legend>
-	<%= f.label :name %><br />
-	<%= f.text_field :name %><br />
-	<br />
-	<%= f.label :email %><br />
-	<%= f.text_field :email %><br />
-	<br />
-	<%= f.label :login %><br />
-	<%= f.text_field :login %><br />
- 	<p><%= f.submit "Update User Information" %></p>
+  <legend>Update Account Information</legend>
+  <%= f.label :name %><br />
+  <%= f.text_field :name %><br />
+  <br />
+  <%= f.label :email %><br />
+  <%= f.text_field :email %><br />
+  <br />
+  <%= f.label :login %><br />
+  <%= f.text_field :login %><br />
+  <p><%= f.submit "Update User Information" %></p>
 </fieldset>
 <% end %>
 
 <% form_for [:admin,@user] do |f| %>
 <fieldset>
-	<legend>Change Your Password</legend>
-	<%= f.label :password, f.object.new_record? ? nil : "New password" %><br />
-	<%= f.password_field :password %><br />
-	<br />
-	<%= f.label :password_confirmation, "New password confirmation" %><br />
-	<%= f.password_field :password_confirmation %><br />
- 	<p><%= f.submit "Update User Information" %></p>
+  <legend>Change Your Password</legend>
+  <%= f.label :password, f.object.new_record? ? nil : "New password" %><br />
+  <%= f.password_field :password %><br />
+  <br />
+  <%= f.label :password_confirmation, "New password confirmation" %><br />
+  <%= f.password_field :password_confirmation %><br />
+  <p><%= f.submit "Update User Information" %></p>
 </fieldset>
 <% end %>

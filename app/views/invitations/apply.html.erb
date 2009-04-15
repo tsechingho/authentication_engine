@@ -1,0 +1,15 @@
+<% title t('invitations.titles.apply') %>
+
+<%= error_messages_for :invitation %>
+
+<% form_for @invitation, :url => ask_invitations_path do |f| %>
+  <p>
+    <%= f.label :applicant_name %><br />
+    <%= f.text_field :applicant_name %>
+  </p>
+  <p>
+    <%= f.label :applicant_email %><br />
+    <%= f.text_field :applicant_email %>
+  </p>
+  <p><%= f.submit t('invitations.actions.apply') %></p>
+<% end %>

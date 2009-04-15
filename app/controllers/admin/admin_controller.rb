@@ -6,4 +6,10 @@ class Admin::AdminController < ApplicationController
   # permit 'root or admin'
 
   layout 'admin'
+
+  protected
+
+  def beta_signup
+    redirect_to admin_root_url unless REGISTRATION[:beta]
+  end
 end

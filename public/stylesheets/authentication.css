@@ -1,104 +1,142 @@
 #user_status {
-	float:right;
-	margin:10px;
-	margin-right:20px;
-	font-size:0.8em;
-	color:gray;
-	}
-	#user_status a:link, #user_status a:visited, #user_status a:active { 
-		text-decoration:none;color:#333333;
-	}
-	#user_status a:hover { 
-		text-decoration:underline;color:black;
+  float:right;
+  margin: 20px -200px 10px 10px;
+  font-size:0.8em;
+  color:gray;
 }
 
+#user_status a:link, #user_status a:visited, #user_status a:active {
+  text-decoration:none;color:#333333;
+}
+
+#user_status a:hover {
+  text-decoration:underline;color:black;
+}
+
+#locale_pannel {
+  float:right;
+  margin: -10px 20px 10px 10px;
+  font-size:0.8em;
+  color:gray;
+}
+
+#locale_pannel a:link, #user_status a:visited, #user_status a:active {
+  text-decoration:none;color:#333333;
+}
+
+#locale_pannel a:hover {
+  text-decoration:underline;color:black;
+}
 
 /* make login and openid boxes pretty */
 
 form.new_user_session {
-	border:0px solid silver;
-	padding:1em;
-	}
-	form.new_user_session label {font-weight:bold;}
-	form.new_user_session label[for=user_session_remember_me] {font-weight:normal;}
-	form.new_user_session input[type=text],form.new_user_session input[type=password] {
-		margin-top:4px;
-		border:1px solid silver;
-		background:url('/images/authentication_engine/user.png') 4px 2px no-repeat;
-		height:18px;
-		width:200px;
-		font-size:14px;
-		color:gray;
-		padding:2px;
-		padding-left:26px;
-	}
-	#user_session_login {
-		background:url('/images/authentication_engine/user.png') 4px 2px no-repeat;
-	}
-	#user_session_password {
-		background:url('/images/authentication_engine/key.png') 4px 2px no-repeat;
-	}
-	#user_session_openid_identifier {
-		background:url('/images/authentication_engine/openid.png') 4px 2px no-repeat;
-		width:300px;
+  border:0px solid silver;
+  padding:1em;
 }
 
+form.new_user_session label {
+  font-weight:bold;
+}
+
+form.new_user_session label[for=user_session_remember_me] {
+  font-weight:normal;
+}
+
+form.new_user_session input[type=text],form.new_user_session input[type=password] {
+  margin-top:4px;
+  border:1px solid silver;
+  background:url('/images/authentication_engine/user.png') 4px 2px no-repeat;
+  height:18px;
+  width:200px;
+  font-size:14px;
+  color:gray;
+  padding:2px;
+  padding-left:26px;
+}
+
+#user_session_login {
+  background:url('/images/authentication_engine/user.png') 4px 2px no-repeat;
+}
+
+#user_session_password {
+  background:url('/images/authentication_engine/key.png') 4px 2px no-repeat;
+}
+
+#user_session_openid_identifier {
+  background:url('/images/authentication_engine/openid.png') 4px 2px no-repeat;
+  width:300px;
+}
 
 form.password_reset {
-	border:1px solid silver;
-	padding:1em;
-	}
-	form.password_reset label {font-weight:bold;}
-	form.password_reset #email {
-		margin-top:4px;
-		border:1px solid silver;
-		background:url('/images/authentication_engine/email_go.png') 4px 2px no-repeat;
-		height:18px;
-		width:300px;
-		font-size:14px;
-		color:gray;
-		padding:2px;
-		padding-left:26px;
+  border:1px solid silver;
+  padding:1em;
+}
+
+form.password_reset label {
+  font-weight:bold;
+}
+
+form.password_reset #email {
+  margin-top:4px;
+  border:1px solid silver;
+  background:url('/images/authentication_engine/email_go.png') 4px 2px no-repeat;
+  height:18px;
+  width:300px;
+  font-size:14px;
+  color:gray;
+  padding:2px;
+  padding-left:26px;
 }
 
 
-form.edit_user, form.new_user label       { font-weight: bold;margin-bottom:0.2em; }
-form.edit_user, form.new_user fieldset    { width:auto;padding:1.4em; margin: 0 0 1.5em 0; border: 1px solid #ccc; }
-form.edit_user, form.new_user legend      { font-weight: normal; border:1px solid #ccc;padding:0.3em 1em 0.3em 1em;}
-
+form.edit_user, form.new_user label {
+  font-weight: bold;margin-bottom:0.2em;
+}
+form.edit_user, form.new_user fieldset {
+  width:auto;padding:1.4em; margin: 0 0 1.5em 0; border: 1px solid #ccc;
+}
+form.edit_user, form.new_user legend {
+  font-weight: normal; border:1px solid #ccc;padding:0.3em 1em 0.3em 1em;
+}
 
 form.edit_user {
-	border:1px solid silver;
-	padding:1em;
-	}
-	form.edit_user label {font-weight:bold;}
-	form.edit_user label[for=user_session_remember_me] {font-weight:normal;}
-	form.edit_user input[type=text],form.edit_user input[type=password] {
-		margin-top:4px;
-		border:1px solid silver;
-		height:18px;
-		width:300px;
-		font-size:14px;
-		color:gray;
-		padding:2px;
-	}	
-	#user_password, #user_password_confirmation {
-		background:url('/images/authentication_engine/key.png') 4px 2px no-repeat;
-		padding-left:26px;
-	}
+  border:1px solid silver;
+  padding:1em;
+}
 
+form.edit_user label {
+  font-weight:bold;
+}
+
+form.edit_user label[for=user_session_remember_me] {
+  font-weight:normal;
+}
+
+form.edit_user input[type=text],form.edit_user input[type=password] {
+  margin-top:4px;
+  border:1px solid silver;
+  height:18px;
+  width:300px;
+  font-size:14px;
+  color:gray;
+  padding:2px;
+}
+
+#user_password, #user_password_confirmation {
+  background:url('/images/authentication_engine/key.png') 4px 2px no-repeat;
+  padding-left:26px;
+}
 
 form.new_user_session input[type=text]:focus, 
 form.new_user_session input[type=password]:focus, 
 form.new_user input[type=text]:focus, 
 form.new_user input[type=password]:focus, 
 form.edit_user input[type=text]:focus, 
-form.edit_user input[type=password]:focus 
-{
-	border:1px solid black;
-	color:black;
+form.edit_user input[type=password]:focus {
+  border:1px solid black;
+  color:black;
 }
-
 
 .fieldWithErrors {
   display: inline;
@@ -122,14 +160,17 @@ form.edit_user input[type=password]:focus
   background-color: #c00;
   color: #fff;
 }
+
 #errorExplanation p {
   color: #333;
   margin-bottom: 0;
   padding: 8px;
 }
+
 #errorExplanation ul {
   margin: 2px 24px;
 }
+
 #errorExplanation ul li {
   font-size: 12px;
   list-style: disc;

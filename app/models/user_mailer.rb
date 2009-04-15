@@ -34,4 +34,12 @@ class UserMailer < ActionMailer::Base
 
     invitation.update_attribute(:sent_at, Time.now)
   end
+
+  def invitation_request(invitation)
+    subject       I18n.t('user_mailer.titles.user_invitation_request')
+    from          invitation.applicant_email
+    recipients    "#{ADMIN[:name]} <#{ADMIN[:email]}>"
+    sent_on       Time.now
+    body          :invitation => invitation
+  end
 end

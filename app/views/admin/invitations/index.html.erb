@@ -1,30 +1,28 @@
+<% title t('admin.invitations.titles.index') %>
 <%# render :partial => 'admin/shared/restful_links', :object => @invitation %>
-<%# auto_title %>
 
-
-<table>
+<table class="invitations">
   <tr>
-    <th>Sender</th>
-    <th>Recipient</th>
-    <th>Created</th>
-    <th>Sent</th>
+    <th><%= at(Invitation, :sender_id) %></th>
+    <th><%= at(Invitation, :recipient_email) %></th>
+    <th><%= t('common.created_at') %></th>
+    <th><%= at(Invitation, :sent_at) %></th>
   </tr>
-  <% for invitation in @invitations %>
-    <tr>
-      <td><%=h invitation.sender ? invitation.sender.name : 'self' %></td>
-      <td><%=h invitation.recipient_email %></td>
-      <td><%=h invitation.created_at %></td>
-      <td>
-			<% if invitation.sent_at.nil? %>
-		    <%= link_to(image_tag('authentication_engine/email_go.png', :class => 'inline_icon', :alt => '', :title => "Send invitation ..."), deliver_admin_invitation_path(invitation), :method => :put) %>
-			<% else %>
-				<%=h invitation.sent_at %>
-			<% end %>
-			</td>
-      <td><%= link_to "Show", admin_invitation_path(invitation) %></td>
-      <td><%= link_to "Edit", edit_admin_invitation_path(invitation) %></td>
-      <td><%= link_to "Destroy", admin_invitation_path(invitation), :confirm => 'Are you sure?', :method => :delete %></td>
-    </tr>
-  <% end %>
+<%- for invitation in @invitations -%>
+  <tr>
+    <td class="user_icon">
+      <%= invitation.sender ? link_to(invitation.sender.name, admin_user_path(invitation.sender)) : 'self' %>
+    </td>
+    <td><%=h invitation.recipient_email %></td>
+    <td><%=h invitation.created_at %></td>
+    <td>
+    <%- if invitation.sent_at.nil? -%>
+      <%= link_to(image_tag('authentication_engine/email_go.png', :class => 'inline_icon', :alt => '', :title => "Send invitation ..."), deliver_admin_invitation_path(invitation), :method => :put) %>
+    <%- else -%>
+      <%=h invitation.sent_at %>
+    <%- end -%>
+    </td>
+  </tr>
+<%- end -%>
 </table>
 

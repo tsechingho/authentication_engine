@@ -2,27 +2,42 @@
   background: #F1F1F1;
   border: 1px solid #E5E5E5;
   padding: 0em 1em 0em 1em;
- 	margin:1em;
-	height:1.5em;}
-	.pagination_info {
-	  background: #F1F1F1;
-	  text-align: left;
-		float:left;
-	  padding: 0em; }
-	.apple_pagination {
-	  background: #F1F1F1;
-	  text-align: right;
-		float:right;
-	  padding: 0em; }
-	  .apple_pagination a, .apple_pagination span {
-	    padding: .2em .3em; }
-	  .apple_pagination span.disabled {
-	    color: #AAA; }
-	  .apple_pagination span.current {
-	    font-weight: bold;
-	    background: transparent url(apple-circle.gif) no-repeat 50% 50%; }
-	  .apple_pagination a {
-	    text-decoration: none;
-	    color: black; }
-	    .apple_pagination a:hover, .apple_pagination a:focus {
-	      text-decoration: underline; }
+   margin:1em;
+  height:1.5em;
+}
+
+.pagination_info {
+  background: #F1F1F1;
+  text-align: left;
+  float:left;
+  padding: 0em;
+}
+
+.apple_pagination {
+  background: #F1F1F1;
+  text-align: right;
+  float:right;
+  padding: 0em;
+}
+
+.apple_pagination a, .apple_pagination span {
+  padding: .2em .3em;
+}
+
+.apple_pagination span.disabled {
+  color: #AAA;
+}
+
+.apple_pagination span.current {
+  font-weight: bold;
+  background: transparent url(apple-circle.gif) no-repeat 50% 50%;
+}
+
+.apple_pagination a {
+  text-decoration: none;
+  color: black;
+}
+
+.apple_pagination a:hover, .apple_pagination a:focus {
+  text-decoration: underline;
+}

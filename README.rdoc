@@ -9,6 +9,7 @@ This Rails 2.3 engine is using the excellent Authlogic gem (http://github.com/bi
 1. You need Rails 2.3! This engine is not based on the rails-engines plugin. 
 2. You need the Authlogic gem, but it will prompt for the gem if it's missing
 3. The OpenID Authentication plugin. Yes, I built in OpenID support by default.
+4. The authlogic_oid gem.
 
 == Installation
 

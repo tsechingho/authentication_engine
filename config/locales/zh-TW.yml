@@ -141,7 +141,12 @@
           attributes:
             recipient_email:
               registered: "已經註冊"
-          reach_invitaion_limit: "你能邀請的數量已經使用完畢"
+              invalid: "不像是標準的電子郵件格式"
+            applicant_email:
+              registered: "已經註冊"
+              invalid: "不像是標準的電子郵件格式"
+          reach_invitation_limit: "你能邀請的數量已經使用完畢"
+        
       
       messages:
         inclusion: "沒有包含在列表中"
@@ -192,8 +197,10 @@
       
       invitation:
         sender_id: "邀請者"
-        recipient_name: "受邀者姓名"
-        recipient_email: "受邀者電子郵件"
+        recipient_name: "朋友的全名"
+        recipient_email: "朋友的電子郵件"
+        applicant_name: "申請者的全名"
+        applicant_email: "申請者的電子郵件"
         sent_at: "發送於"
       
     
@@ -281,14 +288,15 @@
     flashs:
       success:
         create: "感謝，邀請函已經送出"
+        ask: "感謝，我們會審視你的申請"
       notices:
         create: "感謝，當準備好後，我們會通知你"
     titles:
-      new: "新的邀請"
+      new: "提出邀請"
+      apply: "邀請請求"
     actions:
-      new: "邀請!"
-    recipient_name: "朋友的全名："
-    recipient_email: "朋友的電子郵件："
+      new: "邀請！"
+      apply: "提出請求！"
   
   password_resets:
     flashs:
@@ -314,6 +322,7 @@
       activation_confirmation: "帳號啟動完成"
       password_reset_instructions: "密碼重設指引"
       user_invitation: "使用者邀請"
+      user_invitation_request: "使用者邀請請求"
   
   user_sessions:
     flashs:
@@ -350,7 +359,8 @@
       login: "登入"
       logout: "登出"
       update: "更新帳號資訊"
-      send_invitation: "送出邀請"
+      invite: "送出邀請"
+      request_invitation: "提出邀請請求"
     confirms:
       logout: "你確定要登出嗎?"
     basic_information: "基本資訊"
@@ -368,4 +378,15 @@
     new_password_confirmation: "確認新密碼"
     signup_by_openid: "使用 Open ID 註冊"
     signup_by_password: "使用帳號和密碼註冊"
+    invitations_limit: "（剩下 {{count}} 個）"
+    admin_pannel: "管理面板"
   
+  admin:
+    users:
+      titles:
+        index: "使用者列表"
+        show: "使用者"
+    invitations:
+      titles:
+        index: "邀請列表"
+    title_prefix: "管理"

@@ -1,0 +1,42 @@
+table.invitations {
+  table-layout:auto;
+  width:100%;
+  margin:0;
+  border-collapse:collapse;
+}
+
+table.invitations th {
+  text-align:left;
+  font-weight:bold;
+  margin:0px;
+  padding:0.4em 1em 0.2em 0.2em;
+  border-bottom:2px solid black;
+}
+
+table.invitations td {
+  margin:0px;
+  padding:0.5em 1em 0.5em 0.2em;
+  border-bottom:1px solid silver;
+}
+
+table.invitations td.user_icon {
+  padding-left:24px;
+  background:url('/images/authentication_engine/user.png') 0px 6px no-repeat;
+}
+
+span.user_icon {
+  padding-left:24px;
+  background:url('/images/authentication_engine/user.png') 0px 0px no-repeat;
+}
+
+table.invitations td a {
+  color:black;text-decoration:none;
+}
+
+table.invitations td a:visited {
+  color:black;text-decoration:none;
+}
+
+table.invitations td a:hover {
+  color:black;text-decoration:underline;
+}

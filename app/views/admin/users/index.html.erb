@@ -1,19 +1,18 @@
+<% title t('admin.users.titles.index') %>
 <%# render :partial => 'admin/shared/restful_links', :object => @user %>
-<%# auto_title %>
-
 
 <table class="users">
   <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th>Last Login At</th>
+    <th><%= at(User, :name) %></th>
+    <th><%= at(User, :email) %></th>
+    <th><%= at(User, :last_login_at) %></th>
   </tr>
-  <% for user in @users %>
-    <tr>
-      <td class="user_icon"><%= link_to user.name, admin_user_path(user) %></td>
-      <td><%=h user.email %></td>
-      <td><%=h user.last_login_at %></td>
-    </tr>
-  <% end %>
+<%- for user in @users -%>
+  <tr>
+    <td class="user_icon"><%= link_to user.name, admin_user_path(user) %></td>
+    <td><%=h user.email %></td>
+    <td><%=h user.last_login_at %></td>
+  </tr>
+<%- end -%>
 </table>
 

@@ -1,7 +1,7 @@
 Hello <%= @invitation.recipient_name %>!
 
 <%- if @invitation.sender -%>
-<%= @invitation.sender.name || @invitation.sender.login %> has invited you to register.
+<%= @invitation.sender.name %> has invited you to register.
 <%- else -%>
 You are invited to register.
 <%- end -%>

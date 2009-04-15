@@ -1,0 +1,24 @@
+shared: &shared
+  registration:
+    private: true
+    beta: true
+    open: true
+  admin:
+    name: "Administrator"
+    email: "admin@example.com"
+  notifier:
+    host: "localhost:3000"
+    name: "User Notifier"
+    email: "noreply@example.com"
+
+development:
+  <<: *shared
+
+test:
+  <<: *shared
+
+staging:
+  <<: *shared
+
+production:
+  <<: *shared

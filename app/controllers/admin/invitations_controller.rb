@@ -1,56 +1,64 @@
 class Admin::InvitationsController < Admin::AdminController
+  before_filter :beta_signup
+  before_filter :find_invitation, :only => [:show, :edit, :update, :destroy, :deliver]
 
   def index
-    @invitations = Invitation.find(:all)
+    @invitations = Invitation.find :all, :order => 'created_at DESC, sent_at ASC'
   end
-  
-  def show
-    @invitation = Invitation.find(params[:id])
-  end
-  
-  def new
-    @invitation = Invitation.new
-  end
-  
-  def create
-    @invitation = Invitation.new(params[:invitation])
-    if @invitation.save
-      flash[:notice] = "Successfully created invitation."
-      redirect_to admin_invitation_path(@invitation)
-    else
-      render :action => 'new'
-    end
-  end
-  
-  def edit
-    @invitation = Invitation.find(params[:id])
-  end
-  
-  def update
-    @invitation = Invitation.find(params[:id])
-    if @invitation.update_attributes(params[:invitation])
-      flash[:notice] = "Successfully updated invitation"
-      redirect_to admin_invitation_path(@invitation)
-    else
-      render :action => 'edit'
-    end
-  end
-  
-  def destroy
-    @invitation = Invitation.find(params[:id])
-    @invitation.destroy
-    flash[:notice] = "Successfully destroyed invitation."
-    redirect_to admin_invitations_url
-  end
-  
+
+  #def show
+  #end
+
+  #def edit
+  #end
+
+  #def new
+  #  @invitation = Invitation.new
+  #end
+
+  #def create
+  #  @invitation = Invitation.new(params[:invitation])
+  #  if @invitation.save
+  #    flash[:notice] = "Successfully created invitation."
+  #    redirect_to admin_invitation_path(@invitation)
+  #  else
+  #    render :action => 'new'
+  #  end
+  #end
+
+  #def update
+  #  if @invitation.update_attributes(params[:invitation])
+  #    flash[:notice] = "Successfully updated invitation"
+  #    redirect_to admin_invitation_path(@invitation)
+  #  else
+  #    render :action => 'edit'
+  #  end
+  #end
+
+  #def destroy
+  #  @invitation.destroy
+  #  flash[:notice] = "Successfully destroyed invitation."
+  #  redirect_to admin_invitations_url
+  #end
+
   def deliver
-    @invitation = Invitation.find(params[:id])
-    Notifier.deliver_invitation(@invitation, accept_url(@invitation.token))
-    flash[:notice] = "Invitation sent."
-    redirect_to admin_invitations_url
+    if @invitation.save
+      if current_user
+        UserMailer.deliver_invitation(@invitation, accept_url(@invitation.token))
+        flash[:success] = t('invitations.flashs.success.create')
+        redirect_to admin_invitations_url
+      else
+        flash[:notice] = t('invitations.flashs.notice.create')
+        redirect_to admin_root_url
+      end
+    else
+      redirect_to admin_invitations_url
+    end
   end
-  
-  
-  
-  
+
+  protected
+
+  def find_invitation
+    @invitation = Invitation.find(params[:id])
+  end
 end
