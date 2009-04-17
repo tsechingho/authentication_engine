@@ -3,7 +3,7 @@
 <fieldset>
   <legend><%= t('user_sessions.login_toggle', :token => login_toggle) %></legend>
 
-<%= error_messages_for :user_session %>
+<%= error_messages_for :user_session, :object_name => UserSession.human_name %>
 
 <% form_for @user_session, :url => user_session_path do |f| %>
 <div id="password_box"<% unless @user_session.openid_identifier.blank? %> style="display: none;"<% end %>>

@@ -289,9 +289,7 @@
     flashs:
       success:
         create: "感谢，邀请函已经送出"
-        ask: "感谢，我们会审视你的申请"
-      notices:
-        create: "感谢，当准备好后，我们会通知你"
+        request: "感谢，当准备好后，我们会通知你"
     titles:
       new: "提出邀请"
       apply: "邀请请求"
@@ -388,6 +386,13 @@
         index: "用户列表"
         show: "用户"
     invitations:
+      flashs:
+        success:
+          deliver: "用户邀请已经送出"
       titles:
         index: "邀请列表"
+      actions:
+        send: "送出邀请"
+      self: "自己"
     title_prefix: "管理"
+  

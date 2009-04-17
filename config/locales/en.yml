@@ -136,9 +136,7 @@ en:
     flashs:
       success:
         create: "Thank you, invitation sent."
-        ask: "Thank you, we will inspect your application."
-      notices:
-        create: "Thank you, we will notify you when we are ready."
+        request: "Thank you, we will notify you when we are ready."
     titles:
       new: "New Invitation"
       apply: "Invitation Request"
@@ -236,6 +234,13 @@ en:
         index: "Users List"
         show: "User"
     invitations:
+      flashs:
+        success:
+          deliver: "User invitation delivered."
       titles:
         index: "Invitations List"
+      actions:
+        send: "Send invitation"
+      self: "self"
     title_prefix: "Admin"
+  

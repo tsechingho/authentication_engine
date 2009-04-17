@@ -3,7 +3,7 @@ class Admin::InvitationsController < Admin::AdminController
   before_filter :find_invitation, :only => [:show, :edit, :update, :destroy, :deliver]
 
   def index
-    @invitations = Invitation.find :all, :order => 'created_at DESC, sent_at ASC'
+    @invitations = Invitation.find :all, :order => 'sender_id ASC, created_at DESC, sent_at ASC'
   end
 
   #def show
@@ -43,14 +43,9 @@ class Admin::InvitationsController < Admin::AdminController
 
   def deliver
     if @invitation.save
-      if current_user
-        UserMailer.deliver_invitation(@invitation, accept_url(@invitation.token))
-        flash[:success] = t('invitations.flashs.success.create')
-        redirect_to admin_invitations_url
-      else
-        flash[:notice] = t('invitations.flashs.notice.create')
-        redirect_to admin_root_url
-      end
+      UserMailer.deliver_invitation(@invitation, accept_url(@invitation.token))
+      flash[:success] = t('admin.invitations.flashs.success.deliver')
+      redirect_to admin_invitations_url
     else
       redirect_to admin_invitations_url
     end

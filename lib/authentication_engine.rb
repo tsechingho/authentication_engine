@@ -60,6 +60,10 @@ module AuthenticationEngine
       redirect_to root_url unless REGISTRATION[:private] or REGISTRATION[:beta] or REGISTRATION[:open]
     end
 
+    def private_or_beta_signup
+      redirect_to root_url unless REGISTRATION[:private] or REGISTRATION[:beta]
+    end
+
     def private_signup
       redirect_to root_url unless REGISTRATION[:private]
     end

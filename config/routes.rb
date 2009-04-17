@@ -6,9 +6,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users", :only => [:show, :create, :edit, :update]
   map.resources :password_resets, :only => [:new, :edit, :create, :update]
 
-  map.resources :invitations, :only => [:new, :create], :collection => {:apply => :get, :ask => :post} if REGISTRATION[:private] and REGISTRATION[:beta]
+  map.resources :invitations, :only => [:new, :create], :collection => {:apply => :get} if REGISTRATION[:private] and REGISTRATION[:beta]
   map.resources :invitations, :only => [:new, :create] if REGISTRATION[:private] and !REGISTRATION[:beta]
-  map.resources :invitations, :except => :all, :collection => {:apply => :get, :ask => :post} if !REGISTRATION[:private] and REGISTRATION[:beta]
+  map.resources :invitations, :only => [:create], :collection => {:apply => :get} if !REGISTRATION[:private] and REGISTRATION[:beta]
   map.accept '/accept/:invitation_token', :controller => 'users', :action => 'new', :conditions => { :method => :get } if REGISTRATION[:private] or REGISTRATION[:beta]
 
   if REGISTRATION[:open]
