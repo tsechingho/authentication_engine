@@ -12,14 +12,19 @@ class ActivationsController < ApplicationController
 
   # POST /activate/:id
   def create
-    @user = User.find_by_login(params[:id])
+    @user = User.find(params[:id])
     #raise Exception if @user.active?
 
-    @user.activate!(params[:user]) do |result|
+    @user.activate!(params[:user], ACTIVATION[:prompt]) do |result|
       if result
         @user.deliver_activation_confirmation!
-        flash[:success] = t('activations.flashs.success.create')
-        redirect_to account_url
+        if ACTIVATION[:prompt]
+          flash[:success] = t('activations.flashs.success.prompt')
+          redirect_to login_url
+        else
+          flash[:success] = t('activations.flashs.success.create')
+          redirect_to account_url
+        end
       else
         render :action => :new
       end

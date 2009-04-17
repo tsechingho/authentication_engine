@@ -120,6 +120,7 @@ en:
     flashs:
       success:
         create: "Your account has been activated."
+        prompt: "Your account has been activated. Please provide your credentials (login/password, or Open ID) to login system."
     titles:
       new: "Activate your account"
     actions:

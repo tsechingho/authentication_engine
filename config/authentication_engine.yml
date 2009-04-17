@@ -3,6 +3,10 @@ shared: &shared
     private: true
     beta: true
     open: true
+  signup:
+    prompt: false
+  activation:
+    prompt: false
   admin:
     name: "Administrator"
     email: "admin@example.com"

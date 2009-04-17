@@ -2,19 +2,26 @@
 
 <% form_for @user, :url => activate_path(@user), :html => { :method => :post } do |f| %>
   <%= f.error_messages %>
-  <p>
-    <%= f.label :password, t('activations.password') %><br />
-    <%= f.password_field :password %>
-  </p>
-  <p>
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation %>
-  </p>
-  <hr />
-  <p>
-    <%= f.label :openid_identifier, openid_link %><br />
-    <%= f.text_field :openid_identifier %><br />
-  </p>
+  <fieldset>
+    <p>
+      <%= f.label :login %><br />
+      <%= f.text_field :login %>
+    </p>
+    <p>
+      <%= f.label :password, t('activations.password') %><br />
+      <%= f.password_field :password %>
+    </p>
+    <p>
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation %>
+    </p>
+  </fieldset>
+  <fieldset>
+    <p>
+      <%= f.label :openid_identifier, openid_link %><br />
+      <%= f.text_field :openid_identifier, :size => 50 %>
+    </p>
+  </fieldset>
   <p>
     <%= f.submit t('activations.actions.activate') %>
   </p>

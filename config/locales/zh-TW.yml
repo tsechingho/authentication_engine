@@ -273,6 +273,7 @@
     flashs:
       success:
         create: "你的帳號已經被啟動"
+        prompt: "你的帳號已經被啟動，請提供你的登入憑證（帳號/密碼或是Open ID）以便登入系統。"
     titles:
       new: "啟用你的帳號"
     actions:

@@ -31,7 +31,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new
 
-    @user.signup!(params[:user]) do |result|
+    @user.signup!(params[:user], SIGNUP[:prompt]) do |result|
       if result
         if @user.invitation
           @user.deliver_activation_confirmation!
