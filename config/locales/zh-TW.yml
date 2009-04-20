@@ -350,7 +350,6 @@
         admin_required: "抱歉，只有需要管理者權限"
     titles:
       edit: "編輯我的帳號"
-      index: "使用者列表"
       new: "註冊帳號"
       show: "使用者帳號"
     actions:
@@ -382,9 +381,16 @@
   
   admin:
     users:
+      flashs:
+        success:
+          create: "帳號註冊完畢！使用者的帳號啟動指引已經寄出"
       titles:
         index: "使用者列表"
-        show: "使用者"
+        new: "註冊帳號"
+        show: "使用者帳號"
+      actions:
+        new: "新增帳號"
+        create: "建立帳號"
     invitations:
       flashs:
         success:

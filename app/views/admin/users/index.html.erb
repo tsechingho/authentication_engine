@@ -16,3 +16,8 @@
 <%- end -%>
 </table>
 
+<%- if REGISTRATION[:limited] -%>
+<p>
+  <%= link_to t('admin.users.actions.new'), new_admin_user_path %>
+</p>
+<%- end -%>

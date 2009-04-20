@@ -1,8 +1,9 @@
 <%# render :partial => 'admin/shared/restful_links', :object => @user %>
-<%# auto_title %>
+<% title t('admin.users.titles.new') %>
 
 <%= error_messages_for :user %>
-<% form_for [:admin,@user] do |f| %>
+
+<% form_for [:admin, @user] do |f| %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -12,20 +13,6 @@
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :login %><br />
-    <%= f.text_field :login %>
+    <%= f.submit t('admin.users.actions.new') %>
   </p>
-  <p>
-	<%= f.label :password, f.object.new_record? ? nil : "Change password" %><br />
-  <p>
-	<%= f.password_field :password %>
-</p>
-	<%= f.label :password_confirmation %><br />
-	<%= f.password_field :password_confirmation %>
-</p>
-  <p>
-    <%= f.label :openid_identifier %><br />
-    <%= f.text_field :openid_identifier %>
-  </p>
-  <p><%= f.submit "Create Account" %></p>
 <% end %>

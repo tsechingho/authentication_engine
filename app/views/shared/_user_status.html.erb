@@ -23,10 +23,10 @@
   <%- end -%>
 <%- else -%>
   <p>
-    <%- if REGISTRATION[:beta] -%>
+    <%- if REGISTRATION[:requested] -%>
     <%= link_to t('users.actions.request_invitation'), apply_invitations_path %> |
     <%- end -%>
-    <%- if REGISTRATION[:open] -%>
+    <%- if REGISTRATION[:public] -%>
     <%= link_to t('users.actions.signup'), signup_path %> |
     <%- end -%>
     <%= link_to t('users.actions.login'), login_path %>

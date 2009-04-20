@@ -32,6 +32,8 @@ class User < ActiveRecord::Base
   has_many :sent_invitations, :class_name => 'Invitation', :foreign_key => 'sender_id'
   belongs_to :invitation
 
+  named_scope :inactivated, :conditions => ['updated_at = created_at']
+
   before_create :set_invitation_limit
   before_destroy :deny_admin_suicide
 
@@ -138,6 +140,11 @@ class User < ActiveRecord::Base
     self.invitation_limit = 5
   end
 
+  # one admin at least
+  def deny_admin_suicide
+    raise 'admin suicided' if User.count(&:admin) <= 1
+  end
+
   def attributes_to_save
     attrs_to_save = attributes.clone.delete_if do |k, v|
       [:password, crypted_password_field, password_salt_field, :persistence_token, :perishable_token, :single_access_token, :login_count, 
@@ -145,10 +152,5 @@ class User < ActiveRecord::Base
         :updated_at, :lock_version, :admin, :invitation_limit].include?(k.to_sym)
     end
     attrs_to_save.merge!(:password => password, :password_confirmation => password_confirmation)
-  end
-
-  # one admin at least
-  def deny_admin_suicide
-    #raise 'admin suicided' if User.count(&:admin) <= 1
   end
 end

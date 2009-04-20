@@ -6,13 +6,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :controller => "users", :only => [:show, :create, :edit, :update]
   map.resources :password_resets, :only => [:new, :edit, :create, :update]
 
-  map.resources :invitations, :only => [:new, :create], :collection => {:apply => :get} if REGISTRATION[:private] and REGISTRATION[:beta]
-  map.resources :invitations, :only => [:new, :create] if REGISTRATION[:private] and !REGISTRATION[:beta]
-  map.resources :invitations, :only => [:create], :collection => {:apply => :get} if !REGISTRATION[:private] and REGISTRATION[:beta]
-  map.accept '/accept/:invitation_token', :controller => 'users', :action => 'new', :conditions => { :method => :get } if REGISTRATION[:private] or REGISTRATION[:beta]
+  map.resources :invitations, :only => [:new, :create], :collection => {:apply => :get} if REGISTRATION[:private] and REGISTRATION[:requested]
+  map.resources :invitations, :only => [:new, :create] if REGISTRATION[:private] and !REGISTRATION[:requested]
+  map.resources :invitations, :only => [:create], :collection => {:apply => :get} if !REGISTRATION[:private] and REGISTRATION[:requested]
+  map.accept '/accept/:invitation_token', :controller => 'users', :action => 'new', :conditions => { :method => :get } if REGISTRATION[:private] or REGISTRATION[:requested]
 
-  if REGISTRATION[:open]
-    map.signup '/signup', :controller => 'users', :action => 'new', :conditions => { :method => :get }
+  map.signup '/signup', :controller => 'users', :action => 'new', :conditions => { :method => :get } if REGISTRATION[:public]
+
+  if REGISTRATION[:limited] or REGISTRATION[:public]
     map.register '/register/:activation_code', :controller => 'activations', :action => 'new', :conditions => { :method => :get }, :activation_code => nil
     map.activate '/activate/:id', :controller => 'activations', :action => 'create', :conditions => { :method => :post }
   end
@@ -22,7 +23,11 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     admin.root :controller => 'users'
     admin.resource :account, :controller => 'users'
-    admin.resources :users
-    admin.resources :invitations, :member => { :deliver => :put } if REGISTRATION[:beta]
+    if REGISTRATION[:limited]
+      admin.resources :users, :only => [:index, :show, :new, :create]
+    else
+      admin.resources :users, :only => [:index, :show]
+    end
+    admin.resources :invitations, :member => { :deliver => :put }
   end
 end

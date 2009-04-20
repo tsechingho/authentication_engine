@@ -350,7 +350,6 @@
         admin_required: "抱歉，需要管理者权限"
     titles:
       edit: "编辑我的帐号"
-      index: "用户清单"
       new: "注册帐号"
       show: "用户帐号"
     actions:
@@ -382,9 +381,16 @@
   
   admin:
     users:
+      flashs:
+        success:
+          create: "帐号注册完毕！用户的帐号启动指引已经寄出"
       titles:
-        index: "用户列表"
-        show: "用户"
+        index: "用户清单"
+        new: "注册帐号"
+        show: "用户帐号"
+      actions:
+        new: "新增帐号"
+        create: "建立帐号"
     invitations:
       flashs:
         success:

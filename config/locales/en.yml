@@ -198,7 +198,6 @@ en:
         admin_required: "Sorry, only administrators can do that."
     titles:
       edit: "Editing My Account"
-      index: "Listing users"
       new: "Register Account"
       show: "User Account"
     actions:
@@ -230,9 +229,16 @@ en:
   
   admin:
     users:
+      flashs:
+        success:
+          create: "Account registered! User's account activation instructions has sent out."
       titles:
-        index: "Users List"
-        show: "User"
+        index: "Listing users"
+        new: "Register Account"
+        show: "User Account"
+      actions:
+        new: "New account"
+        create: "Create Account"
     invitations:
       flashs:
         success:

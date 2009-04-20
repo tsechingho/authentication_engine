@@ -22,6 +22,8 @@ class Invitation < ActiveRecord::Base
   validate :recipient_is_not_registered, :if => :sender
   validate :sender_has_invitations, :if => :sender
 
+  named_scope :invited, lambda {|mail| {:conditions => ['recipient_email = ? AND sent_at IS NOT NULL', mail]} }
+
   before_create :generate_token
   before_create :decrement_sender_count, :if => :sender
 
@@ -52,7 +54,7 @@ class Invitation < ActiveRecord::Base
   end
 
   def applicant_is_not_invited
-    errors.add :applicant_email, :taken if Invitation.find_by_recipient_email(applicant_email)
+    errors.add :applicant_email, :taken unless Invitation.invited(applicant_email).blank?
   end
 
   def sender_has_invitations

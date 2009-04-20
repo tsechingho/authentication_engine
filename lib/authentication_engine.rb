@@ -57,23 +57,27 @@ module AuthenticationEngine
     end
 
     def no_signup
-      redirect_to root_url unless REGISTRATION[:private] or REGISTRATION[:beta] or REGISTRATION[:open]
+      redirect_to root_url unless REGISTRATION[:private] or REGISTRATION[:requested] or REGISTRATION[:public]
     end
 
-    def private_or_beta_signup
-      redirect_to root_url unless REGISTRATION[:private] or REGISTRATION[:beta]
+    def private_or_requested_signup
+      redirect_to root_url unless REGISTRATION[:private] or REGISTRATION[:requested]
+    end
+
+    def limited_signup
+      redirect_to root_url unless REGISTRATION[:limited]
     end
 
     def private_signup
       redirect_to root_url unless REGISTRATION[:private]
     end
 
-    def beta_signup
-      redirect_to root_url unless REGISTRATION[:beta]
+    def requested_signup
+      redirect_to root_url unless REGISTRATION[:requested]
     end
 
-    def open_signup
-      redirect_to root_url unless REGISTRATION[:open]
+    def public_signup
+      redirect_to root_url unless REGISTRATION[:public]
     end
   end
 

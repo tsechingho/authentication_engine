@@ -1,11 +1,18 @@
 shared: &shared
   registration:
+    # account signed up by admin and confirmed by users themself
+    limited: true
+    # account invitation sent by registered user, and account signed up and confirmed by invited user
     private: true
-    beta: true
-    open: true
+    # account invitation requested by users and sent by admin, and account signed up and confirmed by users themself
+    requested: true
+    # account signed up and confirmed by users themself
+    public: true
   signup:
+    # users need to login themself after signed up
     prompt: false
   activation:
+    # users need to login themself after activated
     prompt: false
   admin:
     name: "Administrator"

@@ -1,8 +1,8 @@
 class InvitationsController < ApplicationController
   # access filter depending on configuration
   before_filter :private_signup, :only => [:new]
-  before_filter :beta_signup, :only => [:apply]
-  before_filter :private_or_beta_signup, :only => [:create]
+  before_filter :requested_signup, :only => [:apply]
+  before_filter :private_or_requested_signup, :only => [:create]
 
   # require_user if only registered users can send invites
   before_filter :require_user, :only => [:new]

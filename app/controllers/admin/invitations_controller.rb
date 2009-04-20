@@ -1,5 +1,4 @@
 class Admin::InvitationsController < Admin::AdminController
-  before_filter :beta_signup
   before_filter :find_invitation, :only => [:show, :edit, :update, :destroy, :deliver]
 
   def index
