@@ -34,9 +34,9 @@ class CreateUsers < ActiveRecord::Migration
         :login => 'root',
         :password => 'root',
         :password_confirmation => 'root',
-        :email => "root@example.com",
-        :admin => true
+        :email => "root@example.com"
       )
+      root_user.admin = true
       root_user.save(false)
       puts "Root user created. login/password is root/root. Please change immediately!"
     else
