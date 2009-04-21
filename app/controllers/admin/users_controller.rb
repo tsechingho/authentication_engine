@@ -49,6 +49,6 @@ class Admin::UsersController < Admin::AdminController
   protected
 
   def find_user
-    @user = params[:id] ? User.find_by_login(params[:id]) : @current_user
+    @user = params[:id] ? User.find(params[:id]) : @current_user
   end
 end
