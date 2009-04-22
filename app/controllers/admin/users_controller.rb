@@ -50,5 +50,7 @@ class Admin::UsersController < Admin::AdminController
 
   def find_user
     @user = params[:id] ? User.find(params[:id]) : @current_user
+  rescue ActiveRecord::RecordNotFound
+    redirect_to admin_root_url
   end
 end

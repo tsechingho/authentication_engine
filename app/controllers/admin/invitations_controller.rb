@@ -54,5 +54,7 @@ class Admin::InvitationsController < Admin::AdminController
 
   def find_invitation
     @invitation = Invitation.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to admin_root_url
   end
 end

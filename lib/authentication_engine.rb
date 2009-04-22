@@ -56,8 +56,12 @@ module AuthenticationEngine
       end
     end
 
-    def no_signup
+    def no_user_signup
       redirect_to root_url unless REGISTRATION[:private] or REGISTRATION[:requested] or REGISTRATION[:public]
+    end
+
+    def limited_or_public_signup
+      redirect_to root_url unless REGISTRATION[:limited] or REGISTRATION[:public]
     end
 
     def private_or_requested_signup
