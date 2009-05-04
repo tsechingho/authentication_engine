@@ -30,7 +30,6 @@ the authentication_engine:sync rake task does the following, so use it with care
 2. moves an authentication_config.yml file and it's initializer into config
 3. moves a mailer template over. rails doesn't seem to pick up mailer templates inside engines
 
-
 == Configuration
 
 A couple of simple steps to get up and running:
@@ -74,6 +73,31 @@ In your layouts and views you can also call the login status bar:
 
   <%= render :partial => 'shared/user_status' %>
 
+
+== Testing
+
+Just remember to add this line to your routes.rb:
+
+  map.root :controller => "home", :action => "index"
+
+First, you need to install the basic gems:
+
+  $ gem install rspec-rails
+  $ gem install cucumber
+  $ gem install webrat
+  $ gem install bmabey-email_spec -s http://gems.github.com
+  $ script/generate rspec
+  $ script/generate cucumber
+  $ script/generate email_spec
+
+Then you can test the features of authentication_engine via rake command:
+
+  $ rake authentication_engine:features
+
+Or test it manually:
+
+  $ rake db:test:prepare
+  $ cucumber vendor/plugins/authentication_engine/features
 
 == To-Do List
 

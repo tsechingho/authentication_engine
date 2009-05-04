@@ -39,6 +39,7 @@ class PasswordResetsController < ApplicationController
 
   def load_user_using_perishable_token
     @user = User.find_using_perishable_token(params[:id])
+    raise ActiveRecord::RecordNotFound unless @user
   rescue ActiveRecord::RecordNotFound
     flash[:error] = t('password_resets.flashs.errors.update')
     redirect_to root_url
